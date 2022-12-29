@@ -1,0 +1,6 @@
+# folder name
+.vscode
+
+# ignore files name
+*.exe
+*.txt
