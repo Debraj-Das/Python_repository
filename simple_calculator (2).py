@@ -1,0 +1,10 @@
+print("Enter first number :: ",end="")
+var1 = int(input())
+print("Enter the second number :: ",end="")
+var2 = int(input())
+
+print("Add of ",var1,"and ",var2," = ",(var1+var2))
+print("substrict of ",var1,"and ",var2," = ",(var1 - var2))
+print("multiple of ",var1,"and ",var2," = ",(var1*var2))
+print("Division of ",var1,"and ",var2," = ",(var1/var2))
+print("modulus of ",var1,"and ",var2," = ",(var1%var2))
