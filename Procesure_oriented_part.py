@@ -99,7 +99,7 @@
 # #     print(a, b , c , d , e)
 
 # # * call the function
-# # fun("name","is","debraj","das")
+# #~ fun("name","is","debraj","das")
 
 # '''
 #     if you not def any class or function then space are -->
@@ -270,8 +270,8 @@ import time         #* import time module
 
 def deb(fun1):
     print("Exectution of deb function")
-    def raj():
-        print("executing start")
+    def raj(var):
+        print("executing start",var)
         fun1()
         print("execution is finish")
     return raj
@@ -280,12 +280,19 @@ def deb(fun1):
 # print("neos")
 # fun()
 
-@deb    #~ this call is Decorators in python this line very importance line so play with it
+#~ this below lines call the "deb" function with "das" function argument and return the "raj" argument
+@deb    #~ this call is Decorators in python 
 def das():
     print("My name is Debraj Das")
 
-das()
 
+das(45)
+
+# print("Next part ")
+
+# deb(das)(34)
 # var = deb(das)    ## if () is join then raj function is called
 
-# var()
+# var(53)
+# var('\n')
+
