@@ -46,7 +46,6 @@ class Student :
         cls.no_of_student = no 
         print("no : ",Student.no_of_student)
 
-
 # deb = Student("Debraj Das","21ME30078","9339573945") # intially by __init__ method(constructor)
 deb = Student.from_dash("Debraj 21ME30078 9339573945")   # intially by Class method
 
@@ -61,6 +60,20 @@ print("no of student : ",Student.no_of_student)
 deb.details()
 print(f"\n{sou.no_of_student} and {deb.no_of_student}")
 
+# Defined of singal inherited class
+class Top_student(Student):
+    def __init__(self, name, roll_no, phone, ranks) -> None:
+        super().__init__(name, roll_no, phone)
+        self.ranks = ranks
+    
+    def top_details(self):
+        self.details()
+        print("Also ranks of the student : ",self.ranks)
+
+
 deb.helloPrint()
 
 
+das = Top_student("you","21273823","0845270485","428")
+print("Print the das details : ")
+das.top_details()
