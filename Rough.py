@@ -27,6 +27,11 @@ def ceildiv(x, d): return x//d if (x % d == 0) else x//d+1
 
 def solve():
     print("Hello world")
+    print("Nice to meet all of you")
+    i = inp()
+    while(i):
+        print("a")
+        i-=1
     
 
 
