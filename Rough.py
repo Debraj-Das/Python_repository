@@ -1,9 +1,17 @@
+'''
+Python is a script language, so you can run it directly.
+so it is not necessary to compile it.
+so it is like another script language, such as Cmd or Bash.
+
+ This Note use for learn and practise python.
+
+'''
+
 import sys
 import os
 import math
 if os.environ.get('ONLINE_JUDGE') == None:
     sys.stdin = open('input.txt', 'r')
-    sys.stdout = open('output.txt', 'w')
 
 sys.setrecursionlimit(100000000)
 def inp(): return int(input())
@@ -26,12 +34,9 @@ def ceildiv(x, d): return x//d if (x % d == 0) else x//d+1
 
 
 def solve():
-    print("Hello world")
-    print("Nice to meet all of you")
-    i = inp()
-    while(i):
-        print("a")
-        i-=1
+    pass
+    
+        
     
 
 
@@ -43,6 +48,6 @@ def solve():
 # main function
 if __name__ == "__main__":
     t = 1
-    t = inp()
+    # t = inp()
     for i in range(t):
         solve()
