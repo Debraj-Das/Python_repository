@@ -35,10 +35,13 @@ def ceildiv(x, d): return x//d if (x % d == 0) else x//d+1
 
 def solve():
     pass
+    print("Hello world")
     
         
     
 
+
+# print(__name__) # it will print __main__ if it is run directly
 
 
 

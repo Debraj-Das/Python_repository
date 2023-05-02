@@ -1,8 +1,8 @@
-# import sys
-# import os
-# import math
-# if os.environ.get('ONLINE_JUDGE') == None:
-#     sys.stdin = open('input.txt', 'r')  # input.txt: name of input file
+import sys
+import os
+import math
+if os.environ.get('ONLINE_JUDGE') == None:
+    sys.stdin = open('input.txt', 'r')  # input.txt: name of input file
 
 '''
 #* Day 4 of 100 days of code
@@ -627,6 +627,476 @@ print("this is outside of for loop")
 
 # similarly while loop with else statement also work (executed when the while loop is completed and not executed when the while loop is break)
 
+
+# * Day 36 of 100 days of Code
+# Try and Except in python
+try:
+    a = int(input("Enter a number : "))
+except Exception as e:  # except statement is executed when the try statement is not executed successfully and it is used to handle the error and there are many types of error in python like ValueError , TypeError , IndexError , etc.
+    # e is a object of Exception class and it is used to print the error
+    print("Error : ", e)
+except:    # You can also use except statement without Exception class and add multiple except statement
+    print("Error : Enter a valid number")
+else:  # else statement is executed when the try statement is executed successfully
+    print("\nEnter number is : ", a)
+    print("This is else statement of try and except")
+finally:  # finally statement is executed when the try statement is executed successfully or not and it is used to execute the code that is always executed
+    print("This is finally statement of try and except")
+
+print("This is outside of try and except")
+
+
+#* Day 37 of 100 days of Code
+# Finally statement in python
+def func1():
+  try:
+    l = [1, 5, 6, 7]
+    i = int(input("Enter the index: "))
+    print(l[i])
+    return 1
+  except:
+    print("Some error occurred")
+    return 0
+  finally:  # finally statement is executed when the try statement is executed successfully or not 
+    #and it is used to execute the code that is always executed and it is used to close the file and database connection
+    # and it is used to release the resources and execute the code that is always executed 
+    # it execute the code before the return statement of this function
+    # that is difference between finally and general code after try and except statement
+    print("I am always executed")
+  # print("I am always executed")
+
+x = func1()
+print(x)
+
+
+#* Day 38 of 100 days of Code
+# Raise Exception in python
+salary = int(input("Enter salary amount: "))
+if not 2000 < salary < 5000:
+    raise ValueError("Not a valid salary") # raise statement is used to raise the exception and it is used to raise the exception manually
+# ValueError is a class of exception and it is used to raise the exception manually
+# there are many types of exception in python like ValueError , TypeError , IndexError , etc.
+# And also you can create your own exception class like
+class CustomError(Exception):
+  # code ...
+  pass
+
+# How to use custom exception class
+try:
+  # code ...
+  pass
+except CustomError:
+  # code...
+  pass
+
+
+#* Day 39 of 100 days of Code
+# In this day we try to check the KBC game solution in python
+
+#* Day 40 of 100 days of Code
+# Exercise 4 : Secret code language
+# Write a python program to translate a message into secret code language. Use the rules below to translate normal English into secret code language
+
+# Coding:
+# if the word contains atleast 3 characters, remove the first letter and append it at the end
+#   now append three random characters at the starting and the end
+# else:
+#   simply reverse the string
+
+# Decoding:
+# if the word contains less than 3 characters, reverse it
+# else:
+#   remove 3 random characters from start and end. Now remove the last letter and append it to the beginning
+
+# Your program should ask whether you want to code or decode
+
+# Encode part
+import string
+import random
+
+def ran_3_char():   
+    randomLetter = random.choice(string.ascii_letters) + random.choice(string.ascii_letters) + random.choice(string.ascii_letters)
+    return randomLetter
+
+s = input()
+if(len(s)>=3):
+    s = s[1:] + s[0]
+    s = ran_3_char() + s + ran_3_char()
+    s = s[::-1]
+else:
+    s = s[::-1]
+
+print("Encoded string is : ", s)
+
+# Decode part
+if(len(s)<3):
+    s = s[::-1]
+else:
+    s = s[::-1]
+    s = s[3:-3]
+    s = s[-1] + s[:-1]
+
+print("Decoded string is : ", s)
+    
+    
+#* Day 41 of 100 days of Code
+# Short Hand if else
+
+a = 330 
+b = 330
+
+if a>b: 
+    print("a")
+elif a==b:
+    print("equal")
+else:
+    print("b")
+    
+# Short Hand if else
+print("a") if a>b else print("equal") if a==b else print("b")
+
+vaule = a if a>b else b # this is also a short hand if else statement
+print(vaule)
+
+#* Day 42 of 100 days of Code
+# Enumerate function in python
+
+marks = [12, 56, 32, 98, 12,  45, 1, 4]
+
+# index = 0
+# for mark in marks:
+#   print(mark)
+#   if(index == 3):
+#     print("Harry, awesome!")
+#   index +=1
+
+for index, mark in enumerate(marks):
+  print(mark)
+  if(index == 3):
+    print("Harry, awesome!")
+print('\n')
+
+l = [321,424,13452,524,3,624,36,24,256,2,156,35,1245,36,52,5365256,5,25,6,255,2,5,2525,24]
+for i , mark in enumerate(l , start=1):
+    print(i , mark)
+# enumerate function is used to iterate the list and tuple and it is used to return the index and value of the list and tuple
+# start is used to start the index from the given number and default value of start is 0 but you can change it
+
+
+#* Day 43 of 100 days of Code
+# Virtual Environment
+# https://replit.com/@codewithharry/43-Day43-Virtual-Environment#.tutorial/Tutorial.md
+# virtual environment is used to create the virtual environment for the project and it is used to install the package in the virtual environment
+# The "requirements.txt" file
+# The requirements.txt file is used to store the package name and version of the package and it is used to install the package in the virtual environment
+
+#* Day 44 of 100 days of Code
+# How import works in python
+import math
+
+print(dir(math)) # dir function is used to print the all the function and variable of the module
+print(math.__doc__) # __doc__ is used to print the documentation of the module
+print(math.__name__) # __name__ is used to print the name of the module
+
+result = math.sqrt(9) # sqrt is a function of math module and it is used to find the square root of the number
+print("The square root of 9 is ",result)
+
+# import math as m # you can also use alias name of the module
+# from math import sqrt, pow # you can also import the specific function of the module
+# from math import * # you can also import all the function of the module
+
+
+#* Day 45 of 100 days of Code
+# main function in python
+
+if __name__ == "__main__": # this is used to check the main function in python
+    print("Hello World")
+    print("This is main function")
+    print("My name is Debraj Das")
+
+
+import Rough as r   # import the module and if any gobal variable, statement is present in the module then it is executed
+# so always use the main function in the module
+
+i = r.inp()
+print("The value of i is",i)
+print(dir(r))   # dir function is used to print the all the function and variable of the module
+print(r.__doc__) # __doc__ is used to print the documentation of the module
+
+
+#* Day 46 of 100 days of Code
+# OS module in python (it is very very important module in python)
+## https://docs.python.org/3/library/os.html (this is the official documentation of the os module in python)
+# This module provides a portable way of using operating system dependent functionality.
+# this create a folder in the current directory and create 100 folder in the folder with name Day(i+1) where i is the index of the loop
+import os
+
+if(not os.path.exists("data")):
+    os.mkdir("data")
+
+# it create 100 folder in the data folder
+for i in range(0, 100):
+    os.mkdir(f"data/Day{i+1}")
+# it delete the 100 folder in the data folder
+for i in range(0, 100):
+    os.rmdir(f"data/Day{i+1}")
+    
+if (os.path.exists("data")):
+    os.rmdir("data")
+
+
+# * Day 47 of 100 days of Code
+# Exercise 4 : solution
+# Write a python program to translate a message into secret code language. Use the rules below to translate normal English into secret code language
+
+# Coding:
+# if the word contains atleast 3 characters, remove the first letter and append it at the end
+#   now append three random characters at the starting and the end
+# else:
+#   simply reverse the string
+
+# Decoding:
+# if the word contains less than 3 characters, reverse it
+# else:
+#   remove 3 random characters from start and end. Now remove the last letter and append it to the beginning
+# Your program should ask whether you want to code or decode
+
+import string
+import random
+
+def ran_3_char():
+    randomLetter = random.choice(string.ascii_letters) + random.choice(
+        string.ascii_letters) + random.choice(string.ascii_letters)
+    return randomLetter
+
+# coding = input("1 for Coding or 0 for Decoding \n")
+# coding = True if (coding == "1") else False
+coding = False
+
+st = input("Enter message")
+words = st.split(" ")
+if (coding):
+    nwords = []
+    for word in words:
+        if (len(word) >= 3):
+            stnew = ran_3_char() + word[1:] + word[0] + ran_3_char()
+            nwords.append(stnew)
+        else:
+            nwords.append(word[::-1])
+    print("message after encode : "," ".join(nwords))
+
+else:
+    nwords = []
+    for word in words:
+        if (len(word) >= 3):
+            stnew = word[3:-3]
+            stnew = stnew[-1] + stnew[:-1]
+            nwords.append(stnew)
+        else:
+            nwords.append(word[::-1])
+    print("message after Decode : "," ".join(nwords))
+
+
+#* Day 48 of 100 days of Code
+# Gobal and local variable in python
+x = 10 # this is a gobal variable
+z = 2345 # this is a gobal variable
+def hell():
+    global x # this is a gobal variable
+    x = 20
+    y = 234 # this is a local variable
+    print("The value of x inside function is",x)
+    print("The value of y inside function is",y)
+    print("The value of z inside function is",z)
+
+print("The value of x outside function before the call the hell function is",x)
+hell()
+print("The value of x outside function is",x)
+
+# But it is not a good practice to use the gobal variable inside the function
+# but if you want to use the gobal variable inside the function then you can use the global keyword
+
+
+# * Day 49 of 100 days of Code
+# File OI in python
+# f = open("input.txt", 'r')  # open the file in read mode
+# content = f.read()  # read the whole content of the file and there are many function to read the file e.g. read(), readline(), readlines()
+# print(content)
+# f.close()  # close the file
+import os
+if (not os.path.exists('name.txt')):
+    f = open("name.txt",'x') # create a file
+    f.close()
+
+# if (os.path.exists('name.pdf')):
+#     os.remove("name.pdf") # remove the file
+
+
+#* Day 50 of 100 days of Code   
+#read() , readline() , writeline() , write() , tell() , seek() , close() , readlines() method in python
+f = open('myfile.txt', 'w')
+lines = ['line 1\n', 'line 2\n', 'line 3\n']
+f.writelines(lines)
+f.close()
+
+f = open('myfile.txt', 'w')
+lines = ['line 1', 'line 2', 'line 3']
+for line in lines:
+    f.write(line + '\n')
+f.close()
+
+
+# * Day 51 of 100 days of Code
+# seeks() , tell() , other method in python
+
+# seek() method is used to move the cursor in the file
+with open('input.txt', 'r') as f:
+    # Move to the 10th byte in the file
+    f.seek(10)
+
+    # Read the next 5 bytes
+    data = f.read(5)
+    print(data)
+
+# tell() method is used to tell the current position of the cursor in the file
+with open('input.txt', 'r') as f:
+    # Read the first 10 bytes
+    data = f.read(10)
+    print(data)
+
+    # Save the current position
+    current_position = f.tell()
+    print(current_position)
+
+    # Seek to the saved position
+    f.seek(current_position+2)
+    print(f.read(5))
+
+# truncate() method is used to truncate the file
+with open('input.txt', 'w') as f:
+  f.write('Hello World!')
+  f.truncate(7)
+
+with open('input.txt', 'r') as f:
+  print(f.read())
+
+
+
+# * Day 52 of 100 days of Code
+# lambda function in python
+# def double(x):
+#   return x*2
+double = lambda x: x * 2 # this is a lambda function and it is also called anonymous function
+# lambda function is used to create a function in one line
+# double function can be def both way
+
+def appl(fx, value):
+  return 6 + fx(value)
+
+cube = lambda x: x * x * x
+avg = lambda x, y, z: (x + y + z) / 3
+
+print(double(5))
+print(cube(5))
+print(avg(3, 5, 10))
+print(appl(lambda x: x * x , 2))
+
+p = lambda x , y : print(f'{x} and {y} = {x+y}')
+
+p(2, 3) # you pass this function to other function as a argument
+
+
+
+# * Day 53 of 100 days of Code
+# Map , Filter , Reduce function in python (**it is very very important)
+# Map function is used to apply a function to all the elements of a list
+l = [1, 2, 3, 4, 5, 24, 2, 14, 5, 4, 36,
+     4, 14, 545, 6, 251, 4, 26, 5, 14, 51, 242]
+newl = list(map(lambda x: x**2, l))
+# this is a map function and it is used to apply a function to all the elements of a list
+
+for i in newl:
+    print(i, end=' ')
+print('\n')
+
+# Filter function is used to filter the elements of a list
+newl = list(filter(lambda x: x > 5, l))
+
+for i in newl:
+    print(i, end=' ')
+print('\n')
+
+# Reduce function is used to reduce the elements of a list
+from functools import reduce
+new = reduce(lambda x, y: x+y, l) # this is a reduce function and it is used to reduce the elements of a list
+print(new)
+
+
+# * Day 54 of 100 days of Code
+# is vs == operator in python
+a = None    # None is a special type in python , so it has only one instance or memory location
+b = None
+print(a is b)  # exact location of object in memory
+print(a is None)  # exact location of object in memory
+print(a == b)  # value
+
+a = [1, 2, 3]  # list is a mutable object in python
+b = [1, 2, 3]
+print(a == b)  # True
+print(a is b)  # False
+
+a = "hello"  # string is a constant value in python
+b = "hello"
+print(a == b)  # True
+print(a is b)  # True
+
+a = 5  # integer is a constant value in python
+b = 5
+print(a == b)  # True
+print(a is b)  # True
+# for constant value python use the same memory location
+# is and == operator give same result for constant value
+# is operator is used to check the exact location of object in memory
+# == operator is used to check the value of object
+
+
+# * Day 55 of 100 days of Code
+# Snake Water Gun
+# Snake, Water and Gun is a variation of the children's game "rock-paper-scissors" where players use hand gestures to represent a snake, water, or a gun.
+# The gun beats the snake, the water beats the gun, and the snake beats the water.
+# Write a python program to create a Snake Water Gun game in Python using if-else statements. Do not create any fancy GUI. Use proper functions to check for win.
+
+#                 S W G
+# computer =      0 1 2
+# player =  S  0  D W L
+#           W  1  L D W
+#           G  2  W L D
+
+import random as r
+user_score = 0
+# 0 for snake , 1 for water , 2 for gun and 3 for see score and other for exit
+table = [[0, 1, -1], [-1, 0, 1], [1, -1, 0]]
+print("0 for snake , 1 for water , 2 for gun and 3 for see score and other for exit")
+while True :
+    user_choice = int(input("Enter your choice (0/1/2) : "))
+    if(user_choice == 3):
+        print(f"Your score is {user_score}")
+    elif(user_choice > 3):
+        print(f"Your final score is {user_score}")
+        break
+    else :
+        computer_choice = r.randint(0, 2)
+        user_score += table[user_choice][computer_choice]
+        if(table[user_choice][computer_choice] == 1):
+            print("You win")
+        elif(table[user_choice][computer_choice] == 0):
+            print("Match draw")
+        else :
+            print("You lose")
+
+print("Thanks for playing")
+
 '''
 
-
+# * Day 56 of 100 days of Code
+## Introduction to OOPs in python
