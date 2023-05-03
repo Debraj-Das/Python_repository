@@ -1,8 +1,8 @@
-import sys
-import os
-import math
-if os.environ.get('ONLINE_JUDGE') == None:
-    sys.stdin = open('input.txt', 'r')  # input.txt: name of input file
+# import sys
+# import os
+# import math
+# if os.environ.get('ONLINE_JUDGE') == None:
+#     sys.stdin = open('input.txt', 'r')  # input.txt: name of input file
 
 '''
 #* Day 4 of 100 days of code
@@ -1061,7 +1061,7 @@ print(a is b)  # True
 
 
 # * Day 55 of 100 days of Code
-# Snake Water Gun
+# Exercise 5 : Snake Water Gun
 # Snake, Water and Gun is a variation of the children's game "rock-paper-scissors" where players use hand gestures to represent a snake, water, or a gun.
 # The gun beats the snake, the water beats the gun, and the snake beats the water.
 # Write a python program to create a Snake Water Gun game in Python using if-else statements. Do not create any fancy GUI. Use proper functions to check for win.
@@ -1097,6 +1097,3 @@ while True :
 print("Thanks for playing")
 
 '''
-
-# * Day 56 of 100 days of Code
-## Introduction to OOPs in python

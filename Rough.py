@@ -41,7 +41,7 @@ def solve():
     
 
 
-# print(__name__) # it will print __main__ if it is run directly
+# print(__name__) # it will print __main__ if it is run directly or print the file name if it is imported
 
 
 
