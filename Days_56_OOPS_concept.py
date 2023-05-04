@@ -806,7 +806,7 @@ class Point:
         self.x = x
         self.y = y
 
-    def __add__(self, other):
+    def __add__(self, other):   # __add__ is a magic method for + operator
         return Point(self.x + other.x, self.y + other.y)
     
 p1 = Point(1, 2)
@@ -814,5 +814,603 @@ p2 = Point(3, 4)
 p3 = p1 + p2
 print(p3.x, p3.y) # prints 4, 6
 
+
+#* Day 78 of 100 days of Code
+# Single inheritance is a type of inheritance where a class inherits properties and behaviors from a single parent class. This is the simplest and most common form of inheritance.
+
+class Animal:
+    def __init__(self, name, species):
+        self.name = name
+        self.species = species
+        
+    def make_sound(self):
+        print("Sound made by the animal")
+
+class Cat(Animal):  # Cat class inherits the Animal class(Single inheritance example)
+    def __init__(self, name, breed):
+        Animal.__init__(self, name, species="Cat")
+        self.breed = breed
+        
+    def make_sound(self):
+        print("Meow!")
+
+d = Cat("Catman", "Doggerman")
+d.make_sound()
+
+a = Animal("Catman", "Cat")
+a.make_sound()
+
+
+#* Day 79 of 100 days of Code
+# Multiple inheritance is a type of inheritance where a class inherits properties and behaviors from more than one parent class.
+class Employee:
+  def __init__(self, name):
+    self.name = name
+  def show(self):
+    print(f"The name is {self.name}")
+
+class Dancer:
+  def __init__(self, dance):
+    self.dance = dance
+
+  def show(self):
+    print(f"The dance is {self.dance}")
+
+class DancerEmployee(Employee, Dancer):
+  def __init__(self, dance, name):
+    self.dance = dance
+    self.name = name
+
+o  = DancerEmployee("Kathak", "Shivani")
+print(o.name)
+print(o.dance)
+o.show()    # it prints the show method of the Employee class because the Employee class is inherited first
+print(DancerEmployee.mro())  # mro() is used to print the order of the class in which the class is inherited
+# it prints 1. DancerEmployee 2. Employee 3. Dancer 4. Object(All the classes are inherited from the object class)
+
+
+#* Day 80 of 100 days of Code
+# Multilevel inheritance is a type of inheritance where a class inherits properties and behaviors from a parent class and also from the parent of the parent class.
+class Animal:
+    def __init__(self, name, species):
+        self.name = name
+        self.species = species
+        
+    def show_details(self):
+        print(f"Name: {self.name}")
+        print(f"Species: {self.species}")
+        
+class Dog(Animal):
+    def __init__(self, name, breed):
+        super().__init__(name, species="Dog")
+        self.breed = breed
+        
+    def show_details(self):
+        Animal.show_details(self)
+        print(f"Breed: {self.breed}")
+        
+class GoldenRetriever(Dog):
+    def __init__(self, name, color):
+        super().__init__(name, breed="Golden Retriever")
+        self.color = color
+        
+    def show_details(self):
+        Dog.show_details(self)
+        print(f"Color: {self.color}")
+        
+dog = GoldenRetriever("Max", "Golden")
+dog.show_details()
+print(GoldenRetriever.mro())
+
+
+#* Day 81 of 100 days of Code
+# Hybrid and Hierarchical Inheritance
+# Hybrid Inheritance is a combination of multiple and multilevel inheritance.
+# Hierarchical Inheritance is a type of inheritance where a class inherits properties and behaviors from more than one child class.
+
+# Example of Hybrid Inheritance 
+class BaseClass:
+  pass
+
+class Derived1(BaseClass):
+  pass  
+
+class Derived2(BaseClass):
+  pass  
+
+class Derived3(Derived1, Derived2):
+  pass
+
+# Hierarchical Inheritance
+class BaseClass:
+  pass
+
+class D1(BaseClass):
+  pass
+
+class D2(BaseClass):
+  pass
+
+class D3(D1):
+  pass
+
+
+#* Day 82 of 100 days of Code
+# Solution of Exercise 8 : Merge PDFs
+# Done
+
+
+#* Day 83 of 100 days of Code
+# Exercise 9 : Shoutout in Python
+# Write a python program to shoutout to your friends in python using the win32com module.
+import win32com.client
+
+# Calling the Dispatch method of the module which interact with Microsoft Speech SDK to speak the given input from list
+
+speaker = win32com.client.Dispatch("SAPI.SpVoice")
+l = ["Debraj", "praveen" , "Aditya" , "Rahul" , "Raj"]
+
+for i in l:
+    speaker.Speak(f"Shoutout to {i}")
+
+
+
+#* Day 84 of 100 days of Code
+import time
+def usingWhile():
+    i = 0
+    sum = 0
+    while i<50000:
+        sum = sum + i
+        i = i +1
+    print("sum is : ",sum)
+
+
+
+def usingFor():
+    sum = 0
+    for i in range(50000):
+        sum = sum + i
+    print("sum is : ",sum)
+
+init = time.time()
+usingFor()
+t1 = time.time() - init
+init = time.time()
+usingWhile()
+print(time.time() - init)
+print(t1)
+
+
+print(4)
+time.sleep(3)
+print("This is printed after 3 seconds")
+ 
+t = time.localtime()
+formatted_time = time.strftime("%Y-%m-%d %H:%M:%S", t)
+
+print(formatted_time) 
+
+
+#* Day 85 of 100 days of Code
+# command line utility using python
+# Download files from the internet using python
+import argparse
+import requests
+
+def download_file(url, local_filename): 
+  if local_filename is None:
+    local_filename = url.split('/')[-1]
+    # NOTE the stream=True parameter below
+  with requests.get(url, stream=True) as r:
+      r.raise_for_status()
+      with open(local_filename, 'wb') as f:
+          for chunk in r.iter_content(chunk_size=8192): 
+              # If you have chunk encoded response uncomment if
+              # and set chunk_size parameter to None.
+              #if chunk: 
+              f.write(chunk)
+  return local_filename
+  
+parser = argparse.ArgumentParser()  
+
+# Add command line arguments
+parser.add_argument("url", help="Url of the file to download")
+# parser.add_argument("output", help="by which name do you want to save your file")
+parser.add_argument("-o", "--output", type=str, help="Name of the file", default=None)
+
+# Parse the arguments
+args = parser.parse_args()
+
+# Use the arguments in your code
+# print(args.url)
+# print(args.output, type(args.output))
+# print(args)   # it prints the namespace of the arguments
+download_file(args.url, args.output)    # it downloads the file from the url and saves it with the name given in the output argument
+
+
+# Delet the jpg files from the current directory
+import os , glob
+l = glob.glob("*.jpg")
+for i in l :
+    os.remove(i)
+
+
+#* Day 86 of 100 days of Code
+# Walrus Operator in python
+# Walrus operator is used to assign values to variables within an expression in places where assignment statements are not allowed, for example, in lambda expressions, conditional expressions, while loops, etc.
+# Walrus operator is denoted by :=
+
+numbers = [1, 2, 3, 4, 5]
+while (n := len(numbers)) > 0:  # it assigns the length of the list to the variable n and checks if it is greater than 0
+    print(numbers.pop())
+
+
+#* Day 87 of 100 days of Code
+# Shutil module in python
+# Shutil module is used to perform high-level file operations like copying and removal of files and folders.
+import shutil
+shutil.rmtree("__pycache__")   # it removes the folder and all the files inside it
+# like this shutil has many functions like copyfile(), copy(), copytree(), move(), rmtree(), which are used to perform file operations
+# link of the documentation of shutil module : https://docs.python.org/3/library/shutil.html
+
+
+#* Day 88 of 100 days of Code
+# Solution of Exercise 9 : Shoutout in Python
+# Done
+
+#* Day 89 of 100 days of Code
+# Requests module in python
+# Requests module is used to send HTTP requests to a server and get the response from the server.
+# link of the documentation of requests module : https://docs.python-requests.org/en/master/
+# import requests
+# r = requests.get("https://www.google.com")
+# print(r.text)   # it prints the html code of the google.com website
+
+# import requests
+
+# url = "https://api.example.com/login"
+# headers = {
+#     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+#     "Content-Type": "application/json"
+# }
+# data = {
+#     "username": "myusername",
+#     "password": "mypassword"
+# }
+
+# response = requests.post(url, headers=headers, json=data)
+
+# print(response.text)
+
+import requests 
+from bs4 import BeautifulSoup
+url = "https://www.codewithharry.com/blogpost/django-cheatsheet/"
+r = requests.get(url)
+# print(r.text)
+
+
+soup = BeautifulSoup(r.text, 'html.parser')
+print(soup.prettify())
+for heading in soup.find_all("h2"):
+  print(heading.text)
+# url = "https://jsonplaceholder.typicode.com/posts"
+
+# data = {
+#     "title": 'harry',
+#     "body": 'bhai',
+#     "userId": 12,
+#   }
+# headers =  {
+#     'Content-type': 'application/json; charset=UTF-8',
+#   }
+# response = requests.post(url, headers=headers, json=data)
+
+# print(response.text)
+
+
+
+#* Day 90 of 100 days of Code
+# Exercise 10 : NewApi in python
+# NewApi is used to get the data from the internet using python
+# link of the documentation of NewApi : https://newsapi.org/docs/client-libraries/python
+
+
+
+#* Day 91 of 100 days of Code
+# Generators in python
+# Generators are used to create iterators in python, they are written just like a normal function but they use yield keyword instead of return keyword
+# Generators are used to save memory and time because of it create the values on the fly
+
+def my_generate():
+    for i in range(5):
+        yield i  # it returns the value of i and saves the state of the function
+
+gen = my_generate()     # it creates a generator object
+for i in range(4):
+    print(next(gen))
+
+
+#* Day 92 of 100 days of code
+# Function Caching in python
+# Function caching is used to save the time of the program by saving the result of the function in the memory
+# it is done by using lru_cache decorator from functools module
+# it is used when we have to call the function again and again with the same arguments
+
+import functools
+
+@functools.lru_cache(maxsize=None)  # it saves the result of the function in the memory
+def fib(n):
+    if n < 2:
+        return n
+    return fib(n-1) + fib(n-2)
+
+print(fib(60))
+# Output: 6765
+
+# By using this you can do very easily dynamic programming and memorisation in programming
+
+
+#* Day 93 of 100 days of Code
+# Exercise 10 : solution of NewApi in python
+import requests
+import json
+
+query = input("What type of news are you interested in? ")
+url = f"https://newsapi.org/v2/everything?q={query}&from=2023-01-28&sortBy=publishedAt&apiKey=dbe57b028aeb41e285a226a94865f7a7"
+r = requests.get(url)
+news = json.loads(r.text)
+# print(news, type(news))
+for article in news["articles"]:
+  print(article["title"])
+  print(article["description"])
+  print("--------------------------------------")
+
+
+#* Day 94 of 100 days of Code
+# Exercise 11 : Drink Water Notification in python
+## this exercise Panding 
+
+
+#* Day 95 of 100 days of Code
+# Regular Expressions in python
+# Regular Expressions are used to :
+# find the patterns in the string , replacing the string and splitting the string and extracting the information from the string
+
+import re
+pattern = r"[a-z]+at"
+text = "The cat is in the hat."
+
+matches = re.findall(pattern, text)
+
+print(matches)
+# Output: ['cat', 'hat']
+
+new_text = re.sub(pattern, "dog", text)
+
+print(new_text)
+# Output: "The dog is in the dog."
+
+## https://regexr.com/
+
+pattern = r"[A-Z]+yclone"
+text = # Cyclone Dumazile was a strong tropical cyclone in the South-West Indian Ocean that affected Madagascar and Réunion in early March 2018.
+Dumazile originated from a cyclone Dyclone low-pressure area that formed near Agaléga on 27 February. 
+It became a tropical disturbance on 2 March, and was named the next day after attaining tropical storm status. Dumazile reached its peak intensity on 5 March, with 10-minute sustained winds of 165 km/h (105 mph), 1-minute sustained winds of 205 km/h (125 mph), and a central atmospheric pressure of 945 hPa (27.91 inHg). 
+As it tracked southeastwards, Dumazile weakened steadily over the next couple of days due to wind shear, and became a post-tropical cyclone on 7 March
+#    # Here # place used trple quotes because it is a multiline string
+
+match = re.search(pattern, text) # it returns the first match of the pattern in the text
+print(match)
+
+# matches = re.finditer(pattern, text)
+# for match in matches:
+#   print(match.span()) 
+#   print(text[match.span()[0]: match.span()[1]])
+
+
+#* Day 96 of 100 days of Code
+#@ Asyncio in python
+# Asyncio is used to do the asynchronous programming in python and it is used to do the concurrent programming in python
+# it is used to do the parallel programming in python and it is not block the main thread of the program
+
+import asyncio
+
+async def my_async_function():
+    # asynchronous code here
+    print("run the async function")
+    await asyncio.sleep(1)
+    return "Hello, Async World!"
+
+async def main():
+    result = await my_async_function()  # it is used to run the single function
+    print(result)
+    L = await asyncio.gather(
+        my_async_function(),    # it is used to run the multiple function at the same time
+        my_async_function(),
+        my_async_function(),
+    )
+    for i in L:
+        print(i)
+    
+
+asyncio.run(main())
+
+import time
+import asyncio 
+import requests
+
+
+async def function1():
+  print("func 1") 
+  URL = "https://wallpaperaccess.in/public/uploads/preview/1920x1200-desktop-background-ultra-hd-wallpaper-wiki-desktop-wallpaper-4k-.jpg"
+  response = requests.get(URL)
+  open("instagram1.jpg", "wb").write(response.content)
+  return "Harry"
+  
+async def function2():
+  print("func 2") 
+  URL = "https://p4.wallpaperbetter.com/wallpaper/490/433/199/nature-2560x1440-tree-snow-wallpaper-preview.jpg"
+  response = requests.get(URL)
+  open("instagram2.jpg", "wb").write(response.content)
+  return "Debraj"
+  
+async def function3():
+  print("func 3")
+  URL = "https://c4.wallpaperflare.com/wallpaper/622/676/943/3d-hd-wikipedia-3d-wallpaper-preview.jpg"
+  response = requests.get(URL)
+  open("instagram3.jpg", "wb").write(response.content)
+  return "Das"
+
+async def main():
+  # await function1()
+  # await function2()
+  # await function3()
+  # return 3
+  L = await asyncio.gather(
+        function1(),
+        function2(),
+        function3(),
+    )
+  print(L)
+  # task = asyncio.create_task(function1())
+  # # await function1()
+  # await function2()
+  # await function3()
+
+asyncio.run(main())
+
+
+#* Day 97 of 100 days of Code
+#@ Multithreading in python
+# Multithreading is used to do the concurrent programming in python and it is used to do the parallel programming in python
+# it is very importance for the network programming and multiprocessing programming in python
+
+import threading
+import time
+from concurrent.futures import ThreadPoolExecutor
+
+# Indicates some task being done
+def func(seconds):
+  print(f"Sleeping for {seconds} seconds")
+  time.sleep(seconds)
+  return seconds
+
+def main():
+    time1 = time.perf_counter()
+    # Normal Code
+    # func(4) 
+    # func(2)
+    # func(1)
+    
+    
+    # Same code using Threads
+    t1 = threading.Thread(target=func, args=[4])
+    t2 = threading.Thread(target=func, args=[2])
+    t3 = threading.Thread(target=func, args=[1])
+    t1.start()
+    t2.start()
+    t3.start()
+    
+    t1.join()
+    t2.join()
+    t3.join()
+    # Calculating Time 
+    time2 = time.perf_counter()
+    print("time : ",time2 - time1)
+
+# main()
+
+
+def poolingDemo():
+  with ThreadPoolExecutor() as executor:
+    # future1 = executor.submit(func, 3)
+    # future2 = executor.submit(func, 2)
+    # future3 = executor.submit(func, 4)
+    # print(future1.result())
+    # print(future2.result())
+    # print(future3.result())
+    l = [3, 5, 1, 2]
+    results = executor.map(func, l)
+    for result in results:
+      print(result)
+
+
+poolingDemo()
+
+
+#* Day 98 of 100 days of Code
+# Multiprocessing in python
+# Multiprocessing is used to do the concurrent programming in python and it is used to do the parallel programming in python
+
+# import concurrent.futures
+import multiprocessing
+import requests
+
+def downloadFile(url, name):
+  print(f"Started Downloading {name}")
+  response = requests.get(url)
+  open(f"files/file{name}.jpg", "wb").write(response.content)
+  print(f"Finished Downloading {name}")
+ 
+
+if __name__ == "__main__":
+    url = "https://picsum.photos/2000/3000"
+    pros = []
+    for i in range(50):
+    # downloadFile(url, i)
+        p = multiprocessing.Process(target=downloadFile, args=[url, i])
+        p.start()
+        pros.append(p)
+
+    for p in pros:
+        p.join()
+
+# with concurrent.futures.ProcessPoolExecutor() as executor:
+#   l1 = [url for i in range(60)]
+#   l2 = [i for i in range(60)]
+#   results = executor.map(downloadFile, l1, l2)
+#   for r in results:
+#     print(r)
+
+
+#* Day 99 of 100 days of Code
+# Exercise 11 : Destop Notifier
+
+## Work pending
+
+#* Day 100 of 100 days of Code
+# Conclution and Where to go from here
+# congratulations for completing the 100 days of code challenge
+
+# Conclusion
+# Congratulations on completing the 100 days of Python code challenge! You have likely gained a solid foundation in the language and developed a range of skills, from basic syntax to more advanced concepts such as object-oriented programming.
+# However, this is just the beginning of your journey with Python. There are many more topics to explore, including machine learning, web development, game development, and more.
+
+# Where to go from here:
+# To continue your learning journey, consider exploring the following resources:
+
+# Python books: There are many excellent books on Python that can help you deepen your knowledge and skills. Some popular options include "Python Crash Course" by Eric Matthes, "Automate the Boring Stuff with Python" by Al Sweigart, and "Fluent Python" by Luciano Ramalho. I would also like to recommend "Hands on Machine Learning book by Aurélien Géron"
+
+# YouTube Projects: There are many YouTube projects available which can be watched after you have some basic understanding of python
+
+# Python communities: There are many online communities where you can connect with other Python learners and experts, ask questions, and share your knowledge. Some popular options include the Python subreddit, the Python Discord server, and the Python community on Stack Overflow.
+
+# GitHub repositories: GitHub is a great resource for finding Python projects, libraries, and code snippets. Some useful repositories to check out include "awesome-python" (a curated list of Python resources), "scikit-learn" (a machine learning library), and "django" (a web development framework).
+
 '''
+
+# Link to some resources
+# Tkinter - You can learn Tkinter which is used to create GUIs from here : https://www.cs.mcgill.ca/~hv/classes/MS/TkinterPres/#Overview
+# Machine Learning - I loved this playlist from Google Developers    https://www.youtube.com/playlist?list=PLOU2XLYxmsIIuiBfYad6rFYQU_jL2ryal
+# Django - For Django, try the tutorial from the official documentation. Trust me its really good   https://docs.djangoproject.com/en/4.1/intro/tutorial01/
+# Overall, the key to mastering Python (or any programming language) is to keep practicing and experimenting. Set yourself challenges, work on personal projects, and stay curious. Good luck!
+
+#? There are some Ideas where I have to work on 
+# 1. Desktop Notifier
+# Asyncio , multiprocessing, multithreading
+# Regular Expression
+# Web Scraping
+# API using python
+# GUI using python
 

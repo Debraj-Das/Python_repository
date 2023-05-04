@@ -301,6 +301,19 @@ merger.write("merged-pdf.pdf")
 merger.close()
 
 
+
+#* Day 83 of 100 days of Code
+# Exercise 9 : Shoutout in Python
+# Write a python program to shoutout to your friends in python using the win32com module.
+import win32com.client
+
+# Calling the Dispatch method of the module which interact with Microsoft Speech SDK to speak the given input from list
+
+speaker = win32com.client.Dispatch("SAPI.SpVoice")
+l = ["Debraj", "praveen" , "Aditya" , "Rahul" , "Raj"]
+
+for i in l:
+    speaker.Speak(f"Shoutout to {i}")
+
+
 '''
-
-
