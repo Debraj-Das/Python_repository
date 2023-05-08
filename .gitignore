@@ -1,5 +1,7 @@
 # folder name
 .vscode
+img
+vid
 
 # ignore files name
 *.exe
