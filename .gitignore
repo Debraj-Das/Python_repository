@@ -1,8 +1,13 @@
 # folder name
 .vscode
-img
-vid
+__pycache__
+Assets
 
 # ignore files name
 *.exe
-*.txt
+*.pyc
+
+input.txt
+output.txt
+commit.py
+
