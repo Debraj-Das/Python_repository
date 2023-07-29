@@ -19,20 +19,19 @@ def seq(): return list(map(int, input().strip().split()))
 def ceil(x): return int(x) if (x == int(x)) else int(x)+1
 def ceildiv(x, d): return x//d if (x % d == 0) else x//d+1
 
+
+def main(bool=False):
+    t = 1
+    if bool:
+        t = inp()
+    for _ in range(t):
+        solve()
+
 # Code for Every test case
 
 
 def solve():
-    pass
+    print("Hello World")
 
 
-
-
-
-
-# main function
-if __name__ == "__main__":
-    t = 1
-    t = inp()
-    for i in range(t):
-        solve()
+main()

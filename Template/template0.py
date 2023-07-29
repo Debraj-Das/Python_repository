@@ -1,12 +1,3 @@
-'''
-Python is a script language, so you can run it directly.
-so it is not necessary to compile it.
-so it is like another script language, such as Cmd or Bash.
-
- This Note use for learn and practise python.
-
-'''
-
 import sys
 import os
 import math
